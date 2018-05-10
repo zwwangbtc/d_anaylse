@@ -14,6 +14,9 @@ class Account(object):
     # def __init__(self):
         
     def getPrice(self,currency):
+        s = requests.get(SERVICE_API).text
+        soup = bs(s, "html.parser")
+        tag = soup.findAll("td", attrs={"class": {"ticker", "lastprice"}})
         f = 1
         t = 0
         for i in tag:
@@ -25,7 +28,7 @@ class Account(object):
             elif f == 1 and t == len(tag):
                 tmp = "None"
                 break
-            if tmp == symbol:
+            if tmp == currency:
                 f = 0
                 continue
     # print(tmp)
