@@ -1,0 +1,401 @@
+2018-05-07 11:50:30,054 - INFO - 日志启动于 2018-05-07 11:50:30.053514
+2018-05-07 11:50:31,500 - INFO -   File "/Users/zhiwei/python/d_anaylse/utils/helper.py", line 166, in start_strat
+    strat.go()
+  File "/Users/zhiwei/python/d_anaylse/app/interExchangeSpread/fixedSpreadArbStrategy.py", line 60, in go
+    self.dataLog()
+  File "/Users/zhiwei/python/d_anaylse/app/interExchangeSpread/statArbStrategy.py", line 108, in dataLog
+    accountInfo = self.getAccuntInfo()
+  File "/Users/zhiwei/python/d_anaylse/app/interExchangeSpread/statArbStrategy.py", line 144, in getAccuntInfo
+    ACCOUNT_INFO)
+  File "/Users/zhiwei/python/d_anaylse/app/exchange/huobi/huobiService.py", line 16, in getAccountInfo
+    res = send2api(params, extra)
+  File "/Users/zhiwei/python/d_anaylse/app/exchange/huobi/util.py", line 48, in send2api
+    return httpRequest(SERVICE_API, pParams)
+  File "/Users/zhiwei/python/d_anaylse/app/exchange/huobi/util.py", line 98, in httpRequest
+    raise Exception("httpPost failed, detail is:%s" % response.text)
+
+2018-05-07 11:50:31,501 - INFO - 日志启动于 2018-05-07 11:50:30.053514
+2018-05-07 11:50:32,096 - INFO -   File "/Users/zhiwei/python/d_anaylse/utils/helper.py", line 166, in start_strat
+    strat.go()
+  File "/Users/zhiwei/python/d_anaylse/app/interExchangeSpread/fixedSpreadArbStrategy.py", line 60, in go
+    self.dataLog()
+  File "/Users/zhiwei/python/d_anaylse/app/interExchangeSpread/statArbStrategy.py", line 108, in dataLog
+    accountInfo = self.getAccuntInfo()
+  File "/Users/zhiwei/python/d_anaylse/app/interExchangeSpread/statArbStrategy.py", line 144, in getAccuntInfo
+    ACCOUNT_INFO)
+  File "/Users/zhiwei/python/d_anaylse/app/exchange/huobi/huobiService.py", line 16, in getAccountInfo
+    res = send2api(params, extra)
+  File "/Users/zhiwei/python/d_anaylse/app/exchange/huobi/util.py", line 48, in send2api
+    return httpRequest(SERVICE_API, pParams)
+  File "/Users/zhiwei/python/d_anaylse/app/exchange/huobi/util.py", line 98, in httpRequest
+    raise Exception("httpPost failed, detail is:%s" % response.text)
+
+2018-05-07 11:50:32,097 - INFO - 日志启动于 2018-05-07 11:50:30.053514
+2018-05-07 11:50:32,705 - INFO -   File "/Users/zhiwei/python/d_anaylse/utils/helper.py", line 166, in start_strat
+    strat.go()
+  File "/Users/zhiwei/python/d_anaylse/app/interExchangeSpread/fixedSpreadArbStrategy.py", line 60, in go
+    self.dataLog()
+  File "/Users/zhiwei/python/d_anaylse/app/interExchangeSpread/statArbStrategy.py", line 108, in dataLog
+    accountInfo = self.getAccuntInfo()
+  File "/Users/zhiwei/python/d_anaylse/app/interExchangeSpread/statArbStrategy.py", line 144, in getAccuntInfo
+    ACCOUNT_INFO)
+  File "/Users/zhiwei/python/d_anaylse/app/exchange/huobi/huobiService.py", line 16, in getAccountInfo
+    res = send2api(params, extra)
+  File "/Users/zhiwei/python/d_anaylse/app/exchange/huobi/util.py", line 48, in send2api
+    return httpRequest(SERVICE_API, pParams)
+  File "/Users/zhiwei/python/d_anaylse/app/exchange/huobi/util.py", line 98, in httpRequest
+    raise Exception("httpPost failed, detail is:%s" % response.text)
+
+2018-05-07 11:50:32,705 - INFO - 日志启动于 2018-05-07 11:50:30.053514
+2018-05-07 11:50:33,308 - INFO -   File "/Users/zhiwei/python/d_anaylse/utils/helper.py", line 166, in start_strat
+    strat.go()
+  File "/Users/zhiwei/python/d_anaylse/app/interExchangeSpread/fixedSpreadArbStrategy.py", line 60, in go
+    self.dataLog()
+  File "/Users/zhiwei/python/d_anaylse/app/interExchangeSpread/statArbStrategy.py", line 108, in dataLog
+    accountInfo = self.getAccuntInfo()
+  File "/Users/zhiwei/python/d_anaylse/app/interExchangeSpread/statArbStrategy.py", line 144, in getAccuntInfo
+    ACCOUNT_INFO)
+  File "/Users/zhiwei/python/d_anaylse/app/exchange/huobi/huobiService.py", line 16, in getAccountInfo
+    res = send2api(params, extra)
+  File "/Users/zhiwei/python/d_anaylse/app/exchange/huobi/util.py", line 48, in send2api
+    return httpRequest(SERVICE_API, pParams)
+  File "/Users/zhiwei/python/d_anaylse/app/exchange/huobi/util.py", line 98, in httpRequest
+    raise Exception("httpPost failed, detail is:%s" % response.text)
+
+2018-05-07 11:50:33,308 - INFO - 日志启动于 2018-05-07 11:50:30.053514
+2018-05-07 11:50:33,941 - INFO -   File "/Users/zhiwei/python/d_anaylse/utils/helper.py", line 166, in start_strat
+    strat.go()
+  File "/Users/zhiwei/python/d_anaylse/app/interExchangeSpread/fixedSpreadArbStrategy.py", line 60, in go
+    self.dataLog()
+  File "/Users/zhiwei/python/d_anaylse/app/interExchangeSpread/statArbStrategy.py", line 108, in dataLog
+    accountInfo = self.getAccuntInfo()
+  File "/Users/zhiwei/python/d_anaylse/app/interExchangeSpread/statArbStrategy.py", line 144, in getAccuntInfo
+    ACCOUNT_INFO)
+  File "/Users/zhiwei/python/d_anaylse/app/exchange/huobi/huobiService.py", line 16, in getAccountInfo
+    res = send2api(params, extra)
+  File "/Users/zhiwei/python/d_anaylse/app/exchange/huobi/util.py", line 48, in send2api
+    return httpRequest(SERVICE_API, pParams)
+  File "/Users/zhiwei/python/d_anaylse/app/exchange/huobi/util.py", line 98, in httpRequest
+    raise Exception("httpPost failed, detail is:%s" % response.text)
+
+2018-05-07 11:50:33,942 - INFO - 日志启动于 2018-05-07 11:50:30.053514
+2018-05-07 11:50:34,326 - INFO -   File "/Users/zhiwei/python/d_anaylse/utils/helper.py", line 166, in start_strat
+    strat.go()
+  File "/Users/zhiwei/python/d_anaylse/app/interExchangeSpread/fixedSpreadArbStrategy.py", line 60, in go
+    self.dataLog()
+  File "/Users/zhiwei/python/d_anaylse/app/interExchangeSpread/statArbStrategy.py", line 108, in dataLog
+    accountInfo = self.getAccuntInfo()
+  File "/Users/zhiwei/python/d_anaylse/app/interExchangeSpread/statArbStrategy.py", line 144, in getAccuntInfo
+    ACCOUNT_INFO)
+  File "/Users/zhiwei/python/d_anaylse/app/exchange/huobi/huobiService.py", line 16, in getAccountInfo
+    res = send2api(params, extra)
+  File "/Users/zhiwei/python/d_anaylse/app/exchange/huobi/util.py", line 48, in send2api
+    return httpRequest(SERVICE_API, pParams)
+  File "/Users/zhiwei/python/d_anaylse/app/exchange/huobi/util.py", line 98, in httpRequest
+    raise Exception("httpPost failed, detail is:%s" % response.text)
+
+2018-05-07 11:50:34,326 - INFO - 日志启动于 2018-05-07 11:50:30.053514
+2018-05-07 11:50:34,695 - INFO -   File "/Users/zhiwei/python/d_anaylse/utils/helper.py", line 166, in start_strat
+    strat.go()
+  File "/Users/zhiwei/python/d_anaylse/app/interExchangeSpread/fixedSpreadArbStrategy.py", line 60, in go
+    self.dataLog()
+  File "/Users/zhiwei/python/d_anaylse/app/interExchangeSpread/statArbStrategy.py", line 108, in dataLog
+    accountInfo = self.getAccuntInfo()
+  File "/Users/zhiwei/python/d_anaylse/app/interExchangeSpread/statArbStrategy.py", line 144, in getAccuntInfo
+    ACCOUNT_INFO)
+  File "/Users/zhiwei/python/d_anaylse/app/exchange/huobi/huobiService.py", line 16, in getAccountInfo
+    res = send2api(params, extra)
+  File "/Users/zhiwei/python/d_anaylse/app/exchange/huobi/util.py", line 48, in send2api
+    return httpRequest(SERVICE_API, pParams)
+  File "/Users/zhiwei/python/d_anaylse/app/exchange/huobi/util.py", line 98, in httpRequest
+    raise Exception("httpPost failed, detail is:%s" % response.text)
+
+2018-05-07 11:50:34,696 - INFO - 日志启动于 2018-05-07 11:50:30.053514
+2018-05-07 11:50:35,061 - INFO -   File "/Users/zhiwei/python/d_anaylse/utils/helper.py", line 166, in start_strat
+    strat.go()
+  File "/Users/zhiwei/python/d_anaylse/app/interExchangeSpread/fixedSpreadArbStrategy.py", line 60, in go
+    self.dataLog()
+  File "/Users/zhiwei/python/d_anaylse/app/interExchangeSpread/statArbStrategy.py", line 108, in dataLog
+    accountInfo = self.getAccuntInfo()
+  File "/Users/zhiwei/python/d_anaylse/app/interExchangeSpread/statArbStrategy.py", line 144, in getAccuntInfo
+    ACCOUNT_INFO)
+  File "/Users/zhiwei/python/d_anaylse/app/exchange/huobi/huobiService.py", line 16, in getAccountInfo
+    res = send2api(params, extra)
+  File "/Users/zhiwei/python/d_anaylse/app/exchange/huobi/util.py", line 48, in send2api
+    return httpRequest(SERVICE_API, pParams)
+  File "/Users/zhiwei/python/d_anaylse/app/exchange/huobi/util.py", line 98, in httpRequest
+    raise Exception("httpPost failed, detail is:%s" % response.text)
+
+2018-05-07 11:50:35,062 - INFO - 日志启动于 2018-05-07 11:50:30.053514
+2018-05-07 11:50:35,643 - INFO -   File "/Users/zhiwei/python/d_anaylse/utils/helper.py", line 166, in start_strat
+    strat.go()
+  File "/Users/zhiwei/python/d_anaylse/app/interExchangeSpread/fixedSpreadArbStrategy.py", line 60, in go
+    self.dataLog()
+  File "/Users/zhiwei/python/d_anaylse/app/interExchangeSpread/statArbStrategy.py", line 108, in dataLog
+    accountInfo = self.getAccuntInfo()
+  File "/Users/zhiwei/python/d_anaylse/app/interExchangeSpread/statArbStrategy.py", line 144, in getAccuntInfo
+    ACCOUNT_INFO)
+  File "/Users/zhiwei/python/d_anaylse/app/exchange/huobi/huobiService.py", line 16, in getAccountInfo
+    res = send2api(params, extra)
+  File "/Users/zhiwei/python/d_anaylse/app/exchange/huobi/util.py", line 48, in send2api
+    return httpRequest(SERVICE_API, pParams)
+  File "/Users/zhiwei/python/d_anaylse/app/exchange/huobi/util.py", line 98, in httpRequest
+    raise Exception("httpPost failed, detail is:%s" % response.text)
+
+2018-05-07 11:50:35,644 - INFO - 日志启动于 2018-05-07 11:50:30.053514
+2018-05-07 11:50:36,032 - INFO -   File "/Users/zhiwei/python/d_anaylse/utils/helper.py", line 166, in start_strat
+    strat.go()
+  File "/Users/zhiwei/python/d_anaylse/app/interExchangeSpread/fixedSpreadArbStrategy.py", line 60, in go
+    self.dataLog()
+  File "/Users/zhiwei/python/d_anaylse/app/interExchangeSpread/statArbStrategy.py", line 108, in dataLog
+    accountInfo = self.getAccuntInfo()
+  File "/Users/zhiwei/python/d_anaylse/app/interExchangeSpread/statArbStrategy.py", line 144, in getAccuntInfo
+    ACCOUNT_INFO)
+  File "/Users/zhiwei/python/d_anaylse/app/exchange/huobi/huobiService.py", line 16, in getAccountInfo
+    res = send2api(params, extra)
+  File "/Users/zhiwei/python/d_anaylse/app/exchange/huobi/util.py", line 48, in send2api
+    return httpRequest(SERVICE_API, pParams)
+  File "/Users/zhiwei/python/d_anaylse/app/exchange/huobi/util.py", line 98, in httpRequest
+    raise Exception("httpPost failed, detail is:%s" % response.text)
+
+2018-05-07 11:50:36,032 - INFO - 日志启动于 2018-05-07 11:50:30.053514
+2018-05-07 11:50:36,411 - INFO -   File "/Users/zhiwei/python/d_anaylse/utils/helper.py", line 166, in start_strat
+    strat.go()
+  File "/Users/zhiwei/python/d_anaylse/app/interExchangeSpread/fixedSpreadArbStrategy.py", line 60, in go
+    self.dataLog()
+  File "/Users/zhiwei/python/d_anaylse/app/interExchangeSpread/statArbStrategy.py", line 108, in dataLog
+    accountInfo = self.getAccuntInfo()
+  File "/Users/zhiwei/python/d_anaylse/app/interExchangeSpread/statArbStrategy.py", line 144, in getAccuntInfo
+    ACCOUNT_INFO)
+  File "/Users/zhiwei/python/d_anaylse/app/exchange/huobi/huobiService.py", line 16, in getAccountInfo
+    res = send2api(params, extra)
+  File "/Users/zhiwei/python/d_anaylse/app/exchange/huobi/util.py", line 48, in send2api
+    return httpRequest(SERVICE_API, pParams)
+  File "/Users/zhiwei/python/d_anaylse/app/exchange/huobi/util.py", line 98, in httpRequest
+    raise Exception("httpPost failed, detail is:%s" % response.text)
+
+2018-05-07 11:50:36,412 - INFO - 日志启动于 2018-05-07 11:50:30.053514
+2018-05-07 11:50:36,772 - INFO -   File "/Users/zhiwei/python/d_anaylse/utils/helper.py", line 166, in start_strat
+    strat.go()
+  File "/Users/zhiwei/python/d_anaylse/app/interExchangeSpread/fixedSpreadArbStrategy.py", line 60, in go
+    self.dataLog()
+  File "/Users/zhiwei/python/d_anaylse/app/interExchangeSpread/statArbStrategy.py", line 108, in dataLog
+    accountInfo = self.getAccuntInfo()
+  File "/Users/zhiwei/python/d_anaylse/app/interExchangeSpread/statArbStrategy.py", line 144, in getAccuntInfo
+    ACCOUNT_INFO)
+  File "/Users/zhiwei/python/d_anaylse/app/exchange/huobi/huobiService.py", line 16, in getAccountInfo
+    res = send2api(params, extra)
+  File "/Users/zhiwei/python/d_anaylse/app/exchange/huobi/util.py", line 48, in send2api
+    return httpRequest(SERVICE_API, pParams)
+  File "/Users/zhiwei/python/d_anaylse/app/exchange/huobi/util.py", line 98, in httpRequest
+    raise Exception("httpPost failed, detail is:%s" % response.text)
+
+2018-05-07 11:50:36,772 - INFO - 日志启动于 2018-05-07 11:50:30.053514
+2018-05-07 11:50:37,399 - INFO -   File "/Users/zhiwei/python/d_anaylse/utils/helper.py", line 166, in start_strat
+    strat.go()
+  File "/Users/zhiwei/python/d_anaylse/app/interExchangeSpread/fixedSpreadArbStrategy.py", line 60, in go
+    self.dataLog()
+  File "/Users/zhiwei/python/d_anaylse/app/interExchangeSpread/statArbStrategy.py", line 108, in dataLog
+    accountInfo = self.getAccuntInfo()
+  File "/Users/zhiwei/python/d_anaylse/app/interExchangeSpread/statArbStrategy.py", line 144, in getAccuntInfo
+    ACCOUNT_INFO)
+  File "/Users/zhiwei/python/d_anaylse/app/exchange/huobi/huobiService.py", line 16, in getAccountInfo
+    res = send2api(params, extra)
+  File "/Users/zhiwei/python/d_anaylse/app/exchange/huobi/util.py", line 48, in send2api
+    return httpRequest(SERVICE_API, pParams)
+  File "/Users/zhiwei/python/d_anaylse/app/exchange/huobi/util.py", line 98, in httpRequest
+    raise Exception("httpPost failed, detail is:%s" % response.text)
+
+2018-05-07 11:50:37,399 - INFO - 日志启动于 2018-05-07 11:50:30.053514
+2018-05-07 11:50:37,989 - INFO -   File "/Users/zhiwei/python/d_anaylse/utils/helper.py", line 166, in start_strat
+    strat.go()
+  File "/Users/zhiwei/python/d_anaylse/app/interExchangeSpread/fixedSpreadArbStrategy.py", line 60, in go
+    self.dataLog()
+  File "/Users/zhiwei/python/d_anaylse/app/interExchangeSpread/statArbStrategy.py", line 108, in dataLog
+    accountInfo = self.getAccuntInfo()
+  File "/Users/zhiwei/python/d_anaylse/app/interExchangeSpread/statArbStrategy.py", line 144, in getAccuntInfo
+    ACCOUNT_INFO)
+  File "/Users/zhiwei/python/d_anaylse/app/exchange/huobi/huobiService.py", line 16, in getAccountInfo
+    res = send2api(params, extra)
+  File "/Users/zhiwei/python/d_anaylse/app/exchange/huobi/util.py", line 48, in send2api
+    return httpRequest(SERVICE_API, pParams)
+  File "/Users/zhiwei/python/d_anaylse/app/exchange/huobi/util.py", line 98, in httpRequest
+    raise Exception("httpPost failed, detail is:%s" % response.text)
+
+2018-05-07 11:50:37,989 - INFO - 日志启动于 2018-05-07 11:50:30.053514
+2018-05-07 11:50:38,596 - INFO -   File "/Users/zhiwei/python/d_anaylse/utils/helper.py", line 166, in start_strat
+    strat.go()
+  File "/Users/zhiwei/python/d_anaylse/app/interExchangeSpread/fixedSpreadArbStrategy.py", line 60, in go
+    self.dataLog()
+  File "/Users/zhiwei/python/d_anaylse/app/interExchangeSpread/statArbStrategy.py", line 108, in dataLog
+    accountInfo = self.getAccuntInfo()
+  File "/Users/zhiwei/python/d_anaylse/app/interExchangeSpread/statArbStrategy.py", line 144, in getAccuntInfo
+    ACCOUNT_INFO)
+  File "/Users/zhiwei/python/d_anaylse/app/exchange/huobi/huobiService.py", line 16, in getAccountInfo
+    res = send2api(params, extra)
+  File "/Users/zhiwei/python/d_anaylse/app/exchange/huobi/util.py", line 48, in send2api
+    return httpRequest(SERVICE_API, pParams)
+  File "/Users/zhiwei/python/d_anaylse/app/exchange/huobi/util.py", line 98, in httpRequest
+    raise Exception("httpPost failed, detail is:%s" % response.text)
+
+2018-05-07 11:50:38,597 - INFO - 日志启动于 2018-05-07 11:50:30.053514
+2018-05-07 11:50:39,209 - INFO -   File "/Users/zhiwei/python/d_anaylse/utils/helper.py", line 166, in start_strat
+    strat.go()
+  File "/Users/zhiwei/python/d_anaylse/app/interExchangeSpread/fixedSpreadArbStrategy.py", line 60, in go
+    self.dataLog()
+  File "/Users/zhiwei/python/d_anaylse/app/interExchangeSpread/statArbStrategy.py", line 108, in dataLog
+    accountInfo = self.getAccuntInfo()
+  File "/Users/zhiwei/python/d_anaylse/app/interExchangeSpread/statArbStrategy.py", line 144, in getAccuntInfo
+    ACCOUNT_INFO)
+  File "/Users/zhiwei/python/d_anaylse/app/exchange/huobi/huobiService.py", line 16, in getAccountInfo
+    res = send2api(params, extra)
+  File "/Users/zhiwei/python/d_anaylse/app/exchange/huobi/util.py", line 48, in send2api
+    return httpRequest(SERVICE_API, pParams)
+  File "/Users/zhiwei/python/d_anaylse/app/exchange/huobi/util.py", line 98, in httpRequest
+    raise Exception("httpPost failed, detail is:%s" % response.text)
+
+2018-05-07 11:50:39,209 - INFO - 日志启动于 2018-05-07 11:50:30.053514
+2018-05-07 11:50:39,577 - INFO -   File "/Users/zhiwei/python/d_anaylse/utils/helper.py", line 166, in start_strat
+    strat.go()
+  File "/Users/zhiwei/python/d_anaylse/app/interExchangeSpread/fixedSpreadArbStrategy.py", line 60, in go
+    self.dataLog()
+  File "/Users/zhiwei/python/d_anaylse/app/interExchangeSpread/statArbStrategy.py", line 108, in dataLog
+    accountInfo = self.getAccuntInfo()
+  File "/Users/zhiwei/python/d_anaylse/app/interExchangeSpread/statArbStrategy.py", line 144, in getAccuntInfo
+    ACCOUNT_INFO)
+  File "/Users/zhiwei/python/d_anaylse/app/exchange/huobi/huobiService.py", line 16, in getAccountInfo
+    res = send2api(params, extra)
+  File "/Users/zhiwei/python/d_anaylse/app/exchange/huobi/util.py", line 48, in send2api
+    return httpRequest(SERVICE_API, pParams)
+  File "/Users/zhiwei/python/d_anaylse/app/exchange/huobi/util.py", line 98, in httpRequest
+    raise Exception("httpPost failed, detail is:%s" % response.text)
+
+2018-05-07 11:50:39,577 - INFO - 日志启动于 2018-05-07 11:50:30.053514
+2018-05-07 11:50:39,961 - INFO -   File "/Users/zhiwei/python/d_anaylse/utils/helper.py", line 166, in start_strat
+    strat.go()
+  File "/Users/zhiwei/python/d_anaylse/app/interExchangeSpread/fixedSpreadArbStrategy.py", line 60, in go
+    self.dataLog()
+  File "/Users/zhiwei/python/d_anaylse/app/interExchangeSpread/statArbStrategy.py", line 108, in dataLog
+    accountInfo = self.getAccuntInfo()
+  File "/Users/zhiwei/python/d_anaylse/app/interExchangeSpread/statArbStrategy.py", line 144, in getAccuntInfo
+    ACCOUNT_INFO)
+  File "/Users/zhiwei/python/d_anaylse/app/exchange/huobi/huobiService.py", line 16, in getAccountInfo
+    res = send2api(params, extra)
+  File "/Users/zhiwei/python/d_anaylse/app/exchange/huobi/util.py", line 48, in send2api
+    return httpRequest(SERVICE_API, pParams)
+  File "/Users/zhiwei/python/d_anaylse/app/exchange/huobi/util.py", line 98, in httpRequest
+    raise Exception("httpPost failed, detail is:%s" % response.text)
+
+2018-05-07 11:50:39,961 - INFO - 日志启动于 2018-05-07 11:50:30.053514
+2018-05-07 11:50:40,332 - INFO -   File "/Users/zhiwei/python/d_anaylse/utils/helper.py", line 166, in start_strat
+    strat.go()
+  File "/Users/zhiwei/python/d_anaylse/app/interExchangeSpread/fixedSpreadArbStrategy.py", line 60, in go
+    self.dataLog()
+  File "/Users/zhiwei/python/d_anaylse/app/interExchangeSpread/statArbStrategy.py", line 108, in dataLog
+    accountInfo = self.getAccuntInfo()
+  File "/Users/zhiwei/python/d_anaylse/app/interExchangeSpread/statArbStrategy.py", line 144, in getAccuntInfo
+    ACCOUNT_INFO)
+  File "/Users/zhiwei/python/d_anaylse/app/exchange/huobi/huobiService.py", line 16, in getAccountInfo
+    res = send2api(params, extra)
+  File "/Users/zhiwei/python/d_anaylse/app/exchange/huobi/util.py", line 48, in send2api
+    return httpRequest(SERVICE_API, pParams)
+  File "/Users/zhiwei/python/d_anaylse/app/exchange/huobi/util.py", line 98, in httpRequest
+    raise Exception("httpPost failed, detail is:%s" % response.text)
+
+2018-05-07 11:50:40,332 - INFO - 日志启动于 2018-05-07 11:50:30.053514
+2018-05-07 11:50:40,951 - INFO -   File "/Users/zhiwei/python/d_anaylse/utils/helper.py", line 166, in start_strat
+    strat.go()
+  File "/Users/zhiwei/python/d_anaylse/app/interExchangeSpread/fixedSpreadArbStrategy.py", line 60, in go
+    self.dataLog()
+  File "/Users/zhiwei/python/d_anaylse/app/interExchangeSpread/statArbStrategy.py", line 108, in dataLog
+    accountInfo = self.getAccuntInfo()
+  File "/Users/zhiwei/python/d_anaylse/app/interExchangeSpread/statArbStrategy.py", line 144, in getAccuntInfo
+    ACCOUNT_INFO)
+  File "/Users/zhiwei/python/d_anaylse/app/exchange/huobi/huobiService.py", line 16, in getAccountInfo
+    res = send2api(params, extra)
+  File "/Users/zhiwei/python/d_anaylse/app/exchange/huobi/util.py", line 48, in send2api
+    return httpRequest(SERVICE_API, pParams)
+  File "/Users/zhiwei/python/d_anaylse/app/exchange/huobi/util.py", line 98, in httpRequest
+    raise Exception("httpPost failed, detail is:%s" % response.text)
+
+2018-05-07 11:50:40,952 - INFO - 日志启动于 2018-05-07 11:50:30.053514
+2018-05-07 11:50:41,333 - INFO -   File "/Users/zhiwei/python/d_anaylse/utils/helper.py", line 166, in start_strat
+    strat.go()
+  File "/Users/zhiwei/python/d_anaylse/app/interExchangeSpread/fixedSpreadArbStrategy.py", line 60, in go
+    self.dataLog()
+  File "/Users/zhiwei/python/d_anaylse/app/interExchangeSpread/statArbStrategy.py", line 108, in dataLog
+    accountInfo = self.getAccuntInfo()
+  File "/Users/zhiwei/python/d_anaylse/app/interExchangeSpread/statArbStrategy.py", line 144, in getAccuntInfo
+    ACCOUNT_INFO)
+  File "/Users/zhiwei/python/d_anaylse/app/exchange/huobi/huobiService.py", line 16, in getAccountInfo
+    res = send2api(params, extra)
+  File "/Users/zhiwei/python/d_anaylse/app/exchange/huobi/util.py", line 48, in send2api
+    return httpRequest(SERVICE_API, pParams)
+  File "/Users/zhiwei/python/d_anaylse/app/exchange/huobi/util.py", line 98, in httpRequest
+    raise Exception("httpPost failed, detail is:%s" % response.text)
+
+2018-05-07 11:50:41,333 - INFO - 日志启动于 2018-05-07 11:50:30.053514
+2018-05-07 11:50:41,916 - INFO -   File "/Users/zhiwei/python/d_anaylse/utils/helper.py", line 166, in start_strat
+    strat.go()
+  File "/Users/zhiwei/python/d_anaylse/app/interExchangeSpread/fixedSpreadArbStrategy.py", line 60, in go
+    self.dataLog()
+  File "/Users/zhiwei/python/d_anaylse/app/interExchangeSpread/statArbStrategy.py", line 108, in dataLog
+    accountInfo = self.getAccuntInfo()
+  File "/Users/zhiwei/python/d_anaylse/app/interExchangeSpread/statArbStrategy.py", line 144, in getAccuntInfo
+    ACCOUNT_INFO)
+  File "/Users/zhiwei/python/d_anaylse/app/exchange/huobi/huobiService.py", line 16, in getAccountInfo
+    res = send2api(params, extra)
+  File "/Users/zhiwei/python/d_anaylse/app/exchange/huobi/util.py", line 48, in send2api
+    return httpRequest(SERVICE_API, pParams)
+  File "/Users/zhiwei/python/d_anaylse/app/exchange/huobi/util.py", line 98, in httpRequest
+    raise Exception("httpPost failed, detail is:%s" % response.text)
+
+2018-05-07 11:50:41,916 - INFO - 日志启动于 2018-05-07 11:50:30.053514
+2018-05-07 11:50:42,549 - INFO -   File "/Users/zhiwei/python/d_anaylse/utils/helper.py", line 166, in start_strat
+    strat.go()
+  File "/Users/zhiwei/python/d_anaylse/app/interExchangeSpread/fixedSpreadArbStrategy.py", line 60, in go
+    self.dataLog()
+  File "/Users/zhiwei/python/d_anaylse/app/interExchangeSpread/statArbStrategy.py", line 108, in dataLog
+    accountInfo = self.getAccuntInfo()
+  File "/Users/zhiwei/python/d_anaylse/app/interExchangeSpread/statArbStrategy.py", line 144, in getAccuntInfo
+    ACCOUNT_INFO)
+  File "/Users/zhiwei/python/d_anaylse/app/exchange/huobi/huobiService.py", line 16, in getAccountInfo
+    res = send2api(params, extra)
+  File "/Users/zhiwei/python/d_anaylse/app/exchange/huobi/util.py", line 48, in send2api
+    return httpRequest(SERVICE_API, pParams)
+  File "/Users/zhiwei/python/d_anaylse/app/exchange/huobi/util.py", line 98, in httpRequest
+    raise Exception("httpPost failed, detail is:%s" % response.text)
+
+2018-05-07 11:50:42,550 - INFO - 日志启动于 2018-05-07 11:50:30.053514
+2018-05-07 11:50:43,165 - INFO -   File "/Users/zhiwei/python/d_anaylse/utils/helper.py", line 166, in start_strat
+    strat.go()
+  File "/Users/zhiwei/python/d_anaylse/app/interExchangeSpread/fixedSpreadArbStrategy.py", line 60, in go
+    self.dataLog()
+  File "/Users/zhiwei/python/d_anaylse/app/interExchangeSpread/statArbStrategy.py", line 108, in dataLog
+    accountInfo = self.getAccuntInfo()
+  File "/Users/zhiwei/python/d_anaylse/app/interExchangeSpread/statArbStrategy.py", line 144, in getAccuntInfo
+    ACCOUNT_INFO)
+  File "/Users/zhiwei/python/d_anaylse/app/exchange/huobi/huobiService.py", line 16, in getAccountInfo
+    res = send2api(params, extra)
+  File "/Users/zhiwei/python/d_anaylse/app/exchange/huobi/util.py", line 48, in send2api
+    return httpRequest(SERVICE_API, pParams)
+  File "/Users/zhiwei/python/d_anaylse/app/exchange/huobi/util.py", line 98, in httpRequest
+    raise Exception("httpPost failed, detail is:%s" % response.text)
+
+2018-05-07 11:50:43,166 - INFO - 日志启动于 2018-05-07 11:50:30.053514
+2018-05-07 11:50:43,743 - INFO -   File "/Users/zhiwei/python/d_anaylse/utils/helper.py", line 166, in start_strat
+    strat.go()
+  File "/Users/zhiwei/python/d_anaylse/app/interExchangeSpread/fixedSpreadArbStrategy.py", line 60, in go
+    self.dataLog()
+  File "/Users/zhiwei/python/d_anaylse/app/interExchangeSpread/statArbStrategy.py", line 108, in dataLog
+    accountInfo = self.getAccuntInfo()
+  File "/Users/zhiwei/python/d_anaylse/app/interExchangeSpread/statArbStrategy.py", line 144, in getAccuntInfo
+    ACCOUNT_INFO)
+  File "/Users/zhiwei/python/d_anaylse/app/exchange/huobi/huobiService.py", line 16, in getAccountInfo
+    res = send2api(params, extra)
+  File "/Users/zhiwei/python/d_anaylse/app/exchange/huobi/util.py", line 48, in send2api
+    return httpRequest(SERVICE_API, pParams)
+  File "/Users/zhiwei/python/d_anaylse/app/exchange/huobi/util.py", line 98, in httpRequest
+    raise Exception("httpPost failed, detail is:%s" % response.text)
+
+2018-05-07 11:50:43,744 - INFO - 日志启动于 2018-05-07 11:50:30.053514

@@ -10,24 +10,26 @@ import time
 import traceback
 import uuid
 
+from common.AccountInfo import Account
+
 COIN_TYPE_BTC_CNY = "btc_cny"
-COIN_TYPE_LTC_CNY = "ltc_cny"
 HUOBI_COIN_TYPE_BTC = 1
 HUOBI_COIN_TYPE_LTC = 2
-COIN_TYPE_CNY = "cny"
-COIN_TYPE_USD = "usd"
+COIN_TYPE_USDT = "usdt"
+COIN_TYPE_BTC = "btc"
+COIN_TYPE_ETH = "eth"
+COIN_TYPE_LTC = "ltc"
+
 
 coinTypeStructure = {
     COIN_TYPE_BTC_CNY: {
         "huobi": {
-            "coin_type": HUOBI_COIN_TYPE_BTC,
-            "market": COIN_TYPE_USD,
+            "coin_type": "btcusdt",
             "coin_str": "huobi_cny_btc",
             "market_str": "huobi_cny_cash"
         },
         "okcoin": {
-            "coin_type": COIN_TYPE_BTC_CNY,
-            "market": COIN_TYPE_USD,
+            "coin_type": "btc_cny",
             "coin_str": "okcoin_cny_btc",
             "market_str": "okcoin_cny_cash"
         }
@@ -89,6 +91,9 @@ def componentExtract(object, key, default=None):
 def getUUID():
     return str(uuid.uuid1())
 
+# 获取price
+def getCurrencyPrice():
+    return Account()
 
 # print traceback to log
 def printTracebackToLog(timeLog):

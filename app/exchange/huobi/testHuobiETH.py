@@ -1,37 +1,53 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
-# @Date    : 2017-05-16 15:29:19
-# @Author  : Ryan (tech@huobi.com)
-# @Link    : https://www.huobi.com
-# @Version : $Id$
 
-from utilETH import *
-import huobiServiceETH
+'''
+本程序在 Python 3.3.0 环境下测试成功
+使用方法：python testHuobi.py
+'''
+import sys
+sys.path.append("../../../")
 
-if __name__ == '__main__':
-    # print("获取1分钟线")
-    # print(huobiServiceETH.get_kline('ethcny', '1min'))
-    # print("获取合并深度为1的盘口")
-    # print(huobiServiceETH.get_depth('ethcny', 'step1'))
-    # print("获取Trade Detail")
-    # print(huobiServiceETH.get_trade('ethcny'))
-    # print("获取 Market Detail 24小时成交量数据")
-    # print(huobiServiceETH.get_detail('ethcny'))
-    print("获取当前账户资产")
-    print(huobiServiceETH.get_balance())
-    # print('下单')
-    # print(huobiServiceETH.orders(1, 'api', 'ethcny', 'buy-limit', 12))
-    # print('执行订单')
-    # print(huobiServiceETH.place_order('58840'))
-    # print('撤销订单')
-    # print(huobiServiceETH.cancel_order('58840'))
-    # print('查询某个订单')
-    # print(huobiServiceETH.order_info('58840'))
-    # print('查询某个订单的成交明细')
-    # print(huobiServiceETH.order_matchresults('45421'))
-    # print('查询当前委托、历史委托')
-    # print(huobiServiceETH.orders_list('ethcny', 'submitted'))
-    # print('查询当前成交、历史成交')
-    # print(huobiServiceETH.orders_matchresults('ethcny'))
-    # print('查询虚拟币提币地址')
-    # print(huobiServiceETH.get_withdraw_address('eth'))
+import app.exchange.huobi.huobiServiceEHT as HuobiService
+from app.exchange.huobi.utilETH import *
+from utils.helper import *
+
+if __name__ == "__main__":
+    # print("获取账号详情")
+    # # print(HuobiService.getAccountInfo("cny", ACCOUNT_INFO))
+
+    # print(HuobiService.getAccountInfo("usd", ACCOUNT_INFO))
+
+    print("real time market")
+    t = HuobiService.getTicker(HUOBI_COIN_TYPE_BTC, "usd")
+    print(t)
+    # t.json()
+    # print (t.ticker.buy)
+    # print (t['ticker']['sell'])
+
+    print("get depth")
+    print(HuobiService.getDepth(HUOBI_COIN_TYPE_BTC, "cny", depth_size=1))
+
+    print('order execution status')
+    print(HuobiService.getOrderInfo(HUOBI_COIN_TYPE_LTC, 326711967, "cny", ORDER_INFO))
+
+    '''
+    print ("获取所有正在进行的委托")
+    print (HuobiService.getOrders(1,GET_ORDERS))
+    print ("获取订单详情")
+    print (HuobiService.getOrderInfo(1,68278313,ORDER_INFO))
+    print ("限价买入")
+    print (HuobiService.buy(1,"1","0.01",None,None,BUY))
+    print ("限价卖出")
+    print (HuobiService.sell(2,"100","0.2",None,None,SELL))
+    print ("市价买入")
+    print (HuobiService.buyMarket(2,"30",None,None,BUY_MARKET))
+    print ("市价卖出")
+    print (HuobiService.sellMarket(2,"1.3452",None,None,SELL_MARKET))
+    print ("查询个人最新10条成交订单")
+    print (HuobiService.getNewDealOrders(1,NEW_DEAL_ORDERS))
+    print ("根据trade_id查询order_id")
+    print (HuobiService.getOrderIdByTradeId(1,274424,ORDER_ID_BY_TRADE_ID))
+    print ("取消订单接口")
+    print (HuobiService.cancelOrder(1,68278313,CANCEL_ORDER))
+    '''

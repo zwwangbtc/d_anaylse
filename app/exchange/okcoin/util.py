@@ -13,7 +13,10 @@ ACCESS_KEY = accountConfig.OKCOIN["USD_1"]["ACCESS_KEY"]
 SECRET_KEY = accountConfig.OKCOIN["USD_1"]["SECRET_KEY"]
 SERVICE_API = accountConfig.OKCOIN["USD_1"]["SERVICE_API"]
 
-
+OKC_BUY = "buy"
+OKC_BUY_MARKET = "buy_market"
+OKC_SELL = "sell"
+OKC_SELL_MARKET = "sell_market"
 
 # 现货API
 def getOkcoinSpot():

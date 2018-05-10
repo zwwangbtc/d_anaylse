@@ -1,6 +1,14 @@
 # !/usr/bin/env python
 # -*- coding: utf-8 -*-
 
+# to worldcoinindex  get Price
+SERVICE_PRICE = {
+    "USD":
+    {
+        "SERVICE_API":"https://www.worldcoinindex.com",
+    },
+}
+
 # huobi config
 HUOBI = {
     "NAME:":"huobi_zzw",
@@ -50,13 +58,6 @@ OKCOIN = {
 
 # btcc config
 BTCC = {
-    "CNY_1":
-        {
-            "ACCESS_KEY": "",
-            "SECRET_KEY": "",
-            "SERVICE_API": "",
-        },
-
     "USD_1":
         {
             "ACCESS_KEY": "",

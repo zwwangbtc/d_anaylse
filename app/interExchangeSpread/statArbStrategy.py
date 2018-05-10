@@ -8,7 +8,7 @@ import numpy as np
 
 from app.exchange.huobi import huobiService
 from app.exchange.huobi.util import *
-from app.exchange.okcoin.util import getOkcoinSpot
+from app.exchange.okcoin.util import *
 from utils import helper
 from utils.errors import StartRunningTimeEmptyError
 
@@ -28,6 +28,7 @@ class StatArbSignalGenerator(object):
         self.TimeFormatForLog = "%Y-%m-%d %H:%M:%S.%f"
         self.OKCoinService = getOkcoinSpot()
         self.HuobiService = huobiService
+        self.Account = getCurrencyPrice()
         self.huobi_min_quantity = self.HuobiService.getMinimumOrderQty(
             helper.coinTypeStructure[self.coinMarketType]["huobi"]["coin_type"])
         self.huobi_min_cash_amount = self.HuobiService.getMinimumOrderCashAmount()
@@ -107,43 +108,63 @@ class StatArbSignalGenerator(object):
         if content is None:
             accountInfo = self.getAccuntInfo()
             t = datetime.datetime.now()
-            content = "%s|%s|%s|%s|%s|%s|%s|%s|%s|%s|%s|%s|%s|%s|%s|%s|%s|%s|%s|%s|%s" % \
+            content = "%s|%s|%s|%s|%s|%s|%s|%s|%s|%s|%s|%s|%s|%s|%s|%s|%s|%s" % \
                       (t.strftime(self.TimeFormatForLog),
-                       accountInfo["huobi_cny_cash"],
-                       accountInfo["huobi_cny_btc"],
-                       accountInfo["huobi_cny_ltc"],
-                       accountInfo["huobi_cny_cash_loan"],
-                       accountInfo["huobi_cny_btc_loan"],
-                       accountInfo["huobi_cny_ltc_loan"],
-                       accountInfo["huobi_cny_cash_frozen"],
-                       accountInfo["huobi_cny_btc_frozen"],
-                       accountInfo["huobi_cny_ltc_frozen"],
-                       accountInfo["huobi_cny_total"],
-                       accountInfo["huobi_cny_net"],
-                       accountInfo["okcoin_cny_cash"],
-                       accountInfo["okcoin_cny_btc"],
-                       accountInfo["okcoin_cny_ltc"],
-                       accountInfo["okcoin_cny_cash_frozen"],
-                       accountInfo["okcoin_cny_btc_frozen"],
-                       accountInfo["okcoin_cny_ltc_frozen"],
-                       accountInfo["okcoin_cny_total"],
-                       accountInfo["okcoin_cny_net"],
-                       accountInfo["total_net"])
+                       accountInfo["huobi_usdt"],
+                       accountInfo["huobi_btc"],
+                       accountInfo["huobi_eth"],
+                       accountInfo["huobi_ltc"],
+                    #    accountInfo["huobi_cny_cash_loan"],
+                    #    accountInfo["huobi_cny_btc_loan"],
+                    #    accountInfo["huobi_cny_ltc_loan"],
+                       accountInfo["huobi_usdt_frozen"],
+                       accountInfo["huobi_btc_frozen"],
+                       accountInfo["huobi_eth_frozen"],
+                       accountInfo["huobi_ltc_frozen"],
+                       accountInfo["huobi_total"],
+                       accountInfo["huobi_net"],
+                       accountInfo["okcoin_btc"],
+                       accountInfo["okcoin_eth"],
+                       accountInfo["okcoin_ltc"],
+                       accountInfo["okcoin_btc_frozen"],
+                       accountInfo["okcoin_eth_frozen"],
+                       accountInfo["okcoin_ltc_frozen"],
+                       accountInfo["okcoin_total"],
+                       accountInfo["okcoin_net"])
+                    #    accountInfo["total_net"])
             self.last_data_log_time = t
         self.dataLogger.info("%s" % str(content))
 
+    def getHuobiAcctList(self,huobiAcctList,fType,sCurrency):
+        for i in huobiAcctList:
+            if i["currency"] == sCurrency and i["type"] == fType :
+                return i["balance"]
+
     def getAccuntInfo(self):
-        huobiAcct = self.HuobiService.getAccountInfo(helper.coinTypeStructure[self.coinMarketType]["huobi"]["market"],
-                                                     ACCOUNT_INFO)
-        # 账户余额
-        huobi_cny_btc = float(huobiAcct["list"]["currency"]["free"]["btc"])
-        huobi_cny_eth = float(huobiAcct["info"]["funds"]["free"]["eth"])
-        huobi_cny_ltc = float(huobiAcct["info"]["funds"]["free"]["ltc"])
+        btcPrice = self.Account.getPrice("ETH")
+        ethPrice = self.Account.getPrice("ETH")
+        ltcPrice = self.Account.getPrice("LTC")
+        huobiAcct = self.HuobiService.getBalance()
+
+        # 账户币种余额
+        huobiAcctList = huobiAcct["data"]["list"]
+        huobi_usdt = float(self.getHuobiAcctList(huobiAcctList,"trade","usdt"))
+        huobi_btc = float(self.getHuobiAcctList(huobiAcctList,"trade","btc") * btcPrice )
+        huobi_eth = float(self.getHuobiAcctList(huobiAcctList,"trade","eth") * ethPrice)
+        huobi_ltc = float(self.getHuobiAcctList(huobiAcctList,"trade","ltc") * ltcPrice)
+        # huobi_cny_btc = float(huobiAcct["list"]["currency"]["free"]["btc"])
+        # huobi_cny_eth = float(huobiAcct["info"]["funds"]["free"]["eth"])
+        # huobi_cny_ltc = float(huobiAcct["info"]["funds"]["free"]["ltc"])
 
         # 账户冻结余额
-        huobi_cny_btc_frozen = float(huobiAcct["info"]["funds"]["freezed"]["btc"])
-        huobi_cny_eth_frozen = float(huobiAcct["info"]["funds"]["freezed"]["eth"])
-        huobi_cny_ltc_frozen = float(huobiAcct["info"]["funds"]["freezed"]["ltc"])
+        huobi_usdt_frozen = float(self.getHuobiAcctList(huobiAcctList,"frozen","usdt"))
+        huobi_btc_frozen = float(self.getHuobiAcctList(huobiAcctList,"frozen","btc") * btcPrice)
+        huobi_eth_frozen = float(self.getHuobiAcctList(huobiAcctList,"frozen","eth") * ethPrice)
+        huobi_ltc_frozen = float(self.getHuobiAcctList(huobiAcctList,"frozen","ltc") * ltcPrice)
+    
+        # huobi_cny_btc_frozen = float(huobiAcct["info"]["funds"]["freezed"]["btc"])
+        # huobi_cny_eth_frozen = float(huobiAcct["info"]["funds"]["freezed"]["eth"])
+        # huobi_cny_ltc_frozen = float(huobiAcct["info"]["funds"]["freezed"]["ltc"])
         
         # huobi_cny_cash = float(huobiAcct[u'available_cny_display'])
         # huobi_cny_btc = float(huobiAcct[u'available_btc_display'])
@@ -157,50 +178,55 @@ class StatArbSignalGenerator(object):
         # huobi_cny_btc_frozen = float(huobiAcct[u'frozen_btc_display'])
         # huobi_cny_ltc_frozen = float(huobiAcct[u'frozen_ltc_display'])
         
-        # huobi_cny_total = float(huobiAcct[u'total'])
-        # huobi_cny_net = float(huobiAcct[u'net_asset'])
+        huobi_total = float(
+                            huobi_usdt + huobi_eth+
+                            huobi_ltc + huobi_usdt_frozen + huobi_btc_frozen+
+                            huobi_eth_frozen + huobi_ltc_frozen)
+        huobi_net = huobi_total
 
         okcoinAcct = self.OKCoinService.userInfo()
         # 账户余额
-        okcoin_cny_btc = float(okcoinAcct["info"]["funds"]["free"]["btc"])
-        okcoin_cny_eth = float(okcoinAcct["info"]["funds"]["free"]["eth"])
-        okcoin_cny_ltc = float(okcoinAcct["info"]["funds"]["free"]["ltc"])
+        okcoin_btc = float(okcoinAcct["info"]["funds"]["free"]["btc"])
+        okcoin_eth = float(okcoinAcct["info"]["funds"]["free"]["eth"])
+        okcoin_ltc = float(okcoinAcct["info"]["funds"]["free"]["ltc"])
 
         # 账户冻结余额
-        okcoin_cny_btc_frozen = float(okcoinAcct["info"]["funds"]["freezed"]["btc"])
-        okcoin_cny_eth_frozen = float(okcoinAcct["info"]["funds"]["freezed"]["eth"])
-        okcoin_cny_ltc_frozen = float(okcoinAcct["info"]["funds"]["freezed"]["ltc"])
+        okcoin_btc_frozen = float(okcoinAcct["info"]["funds"]["freezed"]["btc"])
+        okcoin_eth_frozen = float(okcoinAcct["info"]["funds"]["freezed"]["eth"])
+        okcoin_ltc_frozen = float(okcoinAcct["info"]["funds"]["freezed"]["ltc"])
 
         # 账户资产，包含总资产及净资产
-        okcoin_cny_total = float(okcoinAcct["info"]["funds"]["asset"]["total"])
-        okcoin_cny_net = float(okcoinAcct["info"]["funds"]["asset"]["net"])
-        total_net = huobi_cny_net + okcoin_cny_net
+        okcoin_total = float(okcoinAcct["info"]["funds"]["asset"]["total"])
+        okcoin_net = float(okcoinAcct["info"]["funds"]["asset"]["net"])
+        # total_net = huobi_cny_net + okcoin_cny_net
         return {
-            "huobi_cny_cash": huobi_cny_cash,
-            "huobi_cny_btc": huobi_cny_btc,
-            "huobi_cny_ltc": huobi_cny_ltc,
-            "huobi_cny_cash_loan": huobi_cny_cash_loan,
-            "huobi_cny_btc_loan": huobi_cny_btc_loan,
-            "huobi_cny_ltc_loan": huobi_cny_ltc_loan,
-            "huobi_cny_cash_frozen": huobi_cny_cash_frozen,
-            "huobi_cny_btc_frozen": huobi_cny_btc_frozen,
-            "huobi_cny_ltc_frozen": huobi_cny_ltc_frozen,
-            "huobi_cny_total": huobi_cny_total,
-            "huobi_cny_net": huobi_cny_net,
+            "huobi_usdt": huobi_usdt,
+            "huobi_btc": huobi_btc,
+            "huobi_eth": huobi_eth,
+            "huobi_ltc": huobi_ltc,
+            # "huobi_cny_cash_loan": huobi_cny_cash_loan,
+            # "huobi_cny_btc_loan": huobi_cny_btc_loan,
+            # "huobi_cny_ltc_loan": huobi_cny_ltc_loan,
+            "huobi_usdt_frozen": huobi_usdt_frozen,
+            "huobi_btc_frozen": huobi_btc_frozen,
+            "huobi_eth_frozen": huobi_eth_frozen,
+            "huobi_ltc_frozen": huobi_ltc_frozen,
+            "huobi_total": huobi_total,
+            "huobi_net": huobi_net,
 
-            "okcoin_cny_btc": okcoin_cny_btc,
-            "okcoin_cny_eth": okcoin_cny_eth,
-            "okcoin_cny_ltc": okcoin_cny_ltc,
-            "okcoin_cny_btc_frozen": okcoin_cny_btc_frozen,
-            "okcoin_cny_eth_frozen": okcoin_cny_eth_frozen,
-            "okcoin_cny_ltc_frozen": okcoin_cny_ltc_frozen,
-            "okcoin_cny_total": okcoin_cny_total,
-            "okcoin_cny_net": okcoin_cny_net,
+            "okcoin_btc": okcoin_btc,
+            "okcoin_eth": okcoin_eth,
+            "okcoin_ltc": okcoin_ltc,
+            "okcoin_btc_frozen": okcoin_btc_frozen,
+            "okcoin_eth_frozen": okcoin_eth_frozen,
+            "okcoin_ltc_frozen": okcoin_ltc_frozen,
+            "okcoin_total": okcoin_total,
+            "okcoin_net": okcoin_net,
 
-            "total_net": total_net,
+            # "total_net": total_net,
         }
 
-    # 限价卖单
+    # 限价卖单-huobi( sell-limit：限价卖 )
     # price, quantity are in string format
     def sell_limit(self, security, price, quantity, exchange="huobi"):
         if exchange == "huobi":
@@ -213,8 +239,7 @@ class StatArbSignalGenerator(object):
             self.timeLog("做完小数点处理后的下单数量:%s" % quantity)
             if float(quantity) < self.huobi_min_quantity:
                 self.timeLog(
-                    "数量:%s 小于交易所最小交易数量(火币最小数量:%f),因此无法下单,此处忽略该信号" % (
-                        quantity, self.huobi_min_quantity),
+                    "数量:%s 小于交易所最小交易数量(火币最小数量:%f),因此无法下单,此处忽略该信号" % (quantity, self.huobi_min_quantity),
                     level=logging.WARN)
                 return None
 
@@ -224,54 +249,51 @@ class StatArbSignalGenerator(object):
             price = str(tmp)
             self.timeLog("做完小数点处理后的下单价格:%s" % price)
 
-            coin_type = helper.coinTypeStructure[self.coinMarketType]["huobi"]["coin_type"]
-            market = helper.coinTypeStructure[self.coinMarketType]["huobi"]["market"]
+            symbol = helper.coinTypeStructure[self.coinMarketType]["huobi"]["coin_type"]
+            # market = helper.coinTypeStructure[self.coinMarketType]["huobi"]["market"]
 
-            res = self.HuobiService.sell(
-                coin_type, price, quantity, None, None, market, SELL)
+            # 下单
+            res = self.HuobiService.sendOrder(quantity,price,"api",symbol,HB_SELL)
             if helper.componentExtract(res, u"result", "") != u'success':
-                self.timeLog("下达火币限价卖单（数量：%s, 价格：%s）失败, 结果是: %s！" % (
+                self.timeLog("下达火币限价卖单（数量：%s, 价格：%f）失败, 结果是: %s！" % (
                     quantity, price, helper.componentExtract(res, u"result", "")),
                     level=logging.ERROR)
                 return None
 
-            order_id = res[u"id"]
+            order_id = res[u"data"]
+            
             # 查询订单执行情况
-            order_info = self.HuobiService.getOrderInfo(
-                coin_type, order_id, market, ORDER_INFO)
+            order_info = self.HuobiService.getOrderInfo(order_id)
             self.timeLog("下达如下火币限价卖单，数量：%s, 价格：%s" % (quantity, price))
             self.timeLog(str(order_info))
 
             retry_time = 0
-            while retry_time < self.huobi_order_query_retry_maximum_times and order_info["status"] != 2:
+            while retry_time < self.huobi_order_query_retry_maximum_times and order_info["state"] != "filled":
                 self.timeLog("等待%f秒直至订单完成" % self.orderWaitingTime)
                 time.sleep(self.orderWaitingTime)
-                order_info = self.HuobiService.getOrderInfo(
-                    coin_type, order_id, market, ORDER_INFO)
+                order_info = self.HuobiService.getOrderInfo(order_id)
                 self.timeLog(str(order_info))
                 retry_time += 1
 
             # if order is not fully filled, cancel order if after timeout, cancel order is synchronized
-            if order_info["status"] != 2:
-                cancel_result = self.HuobiService.cancelOrder(
-                    coin_type, order_id, market, CANCEL_ORDER)
+            if order_info["state"] != "filled":
+                cancel_result = self.HuobiService.cancelOrder(order_id)
                 retry_time = 0
                 while retry_time < self.huobi_order_cancel_query_retry_maximum_times and helper.componentExtract(
                         cancel_result, u"result", "") != u'success':
                     self.timeLog("等待%f秒直至订单取消完成" % self.orderWaitingTime)
                     time.sleep(self.orderWaitingTime)
-                    cancel_result = self.HuobiService.cancelOrder(
-                        coin_type, order_id, market, CANCEL_ORDER)
+                    cancel_result = self.HuobiService.cancelOrder(order_id)
                     retry_time += 1
-                order_info = self.HuobiService.getOrderInfo(
-                    coin_type, order_id, market, ORDER_INFO)
+                order_info = self.HuobiService.getOrderInfo(order_id)
 
-            executed_qty = float(order_info["processed_amount"])
+            executed_qty = float(order_info["field-amount"])
             self.timeLog(
-                "火币限价卖单已被执行，执行数量：%f，收到的现金：%.2f" % (executed_qty, executed_qty * float(order_info["processed_price"])))
+                "火币限价卖单已被执行，执行数量：%f，收到的现金：%.2f" % (executed_qty, executed_qty * float(order_info["field-cash-amount"])))
             return executed_qty
+
         elif exchange == "okcoin":
-            self.timeLog("开始下达okcoin限价卖单...")
+            self.timeLog("开始下达okcoin限价卖单...")      
             self.timeLog("只保留下单数量的小数点后2位...")
             self.timeLog("原始下单数量:%s" % quantity)
             tmp = float(quantity)
@@ -291,10 +313,9 @@ class StatArbSignalGenerator(object):
             price = str(tmp)
             self.timeLog("做完小数点处理后的下单价格:%s" % price)
 
-            coin_type = helper.coinTypeStructure[self.coinMarketType]["okcoin"]["coin_type"]
+            symbol = helper.coinTypeStructure[self.coinMarketType]["okcoin"]["coin_type"]
 
-            res = self.OKCoinService.trade(
-                coin_type, "sell", price=price, amount=quantity)
+            res = self.OKCoinService.trade(symbol, OKC_SELL, price=price, amount=quantity)
             if helper.componentExtract(res, "result") != True:
                 self.timeLog(
                     "下达okcoin限价卖单（数量：%s, 价格：%s）失败, 结果是：%s" % (
@@ -303,7 +324,7 @@ class StatArbSignalGenerator(object):
                 return None
             order_id = res["order_id"]
             # 查询订单执行情况
-            order_info = self.OKCoinService.orderInfo(coin_type, str(order_id))
+            order_info = self.OKCoinService.getOrderInfo(symbol, str(order_id))
             self.timeLog("下达如下okcoin限价卖单，数量：%s, 价格：%s" % (quantity, price))
             self.timeLog(str(order_info))
 
@@ -311,31 +332,27 @@ class StatArbSignalGenerator(object):
             while retry_time < self.okcoin_order_query_retry_maximum_times and order_info["orders"][0]["status"] != 2:
                 self.timeLog("等待%.1f秒直至订单完成" % self.orderWaitingTime)
                 time.sleep(self.orderWaitingTime)
-                order_info = self.OKCoinService.orderInfo(
-                    coin_type, str(order_id))
+                order_info = self.OKCoinService.getOrderInfo(symbol, str(order_id))
                 self.timeLog(str(order_info))
                 retry_time += 1
 
             if order_info["orders"][0]["status"] != 2:
-                cancel_result = self.OKCoinService.cancelOrder(
-                    coin_type, str(order_id))
+                cancel_result = self.OKCoinService.cancelOrder(symbol, str(order_id))
                 retry_time = 0
                 while retry_time < self.okcoin_order_cancel_query_retry_maximum_times and helper.componentExtract(
                         cancel_result, u"result", "") != True:
                     self.timeLog("等待%f秒直至订单取消完成" % self.orderWaitingTime)
                     time.sleep(self.orderWaitingTime)
-                    cancel_result = self.OKCoinService.cancelOrder(
-                        coin_type, str(order_id))
+                    cancel_result = self.OKCoinService.cancelOrder(symbol, str(order_id))
                     retry_time += 1
-                order_info = self.OKCoinService.orderInfo(
-                    coin_type, str(order_id))
+                order_info = self.OKCoinService.getOrderInfo(symbol, str(order_id))
 
             executed_qty = order_info["orders"][0]["deal_amount"]
             self.timeLog("okcoin限价卖单已被执行，执行数量：%f，收到的现金：%.2f" % (
                 executed_qty, executed_qty * order_info["orders"][0]["avg_price"]))
             return executed_qty
 
-    # 市价卖单
+    # 市价卖单-(sell-market：市价卖)
     def sell_market(self, security, quantity, exchange="huobi"):  # quantity is a string value
         if exchange == "huobi":
             self.timeLog("开始下达火币市价卖单...")
@@ -352,35 +369,35 @@ class StatArbSignalGenerator(object):
                     level=logging.WARN)
                 return None
 
-            coin_type = helper.coinTypeStructure[self.coinMarketType]["huobi"]["coin_type"]
-            market = helper.coinTypeStructure[self.coinMarketType]["huobi"]["market"]
+            symbol = helper.coinTypeStructure[self.coinMarketType]["huobi"]["coin_type"]
+            # market = helper.coinTypeStructure[self.coinMarketType]["huobi"]["market"]
 
-            res = self.HuobiService.sellMarket(
-                coin_type, quantity, None, None, market, SELL_MARKET)
+            res = self.HuobiService.sendOrder(quantity,None,"api",symbol,HB_SELL_MARKET)
+            # res = self.HuobiService.sellMarket(
+            #     coin_type, quantity, None, None, market, SELL_MARKET)
             if helper.componentExtract(res, u"result", "") != u'success':
                 self.timeLog("下达火币市价卖单（数量：%s）失败, 结果是: %s！" % (quantity, helper.componentExtract(res, u"result", "")),
                              level=logging.ERROR)
                 return None
-            order_id = res[u"id"]
+            order_id = res[u"data"]
             # 查询订单执行情况
-            order_info = self.HuobiService.getOrderInfo(
-                coin_type, order_id, market, ORDER_INFO)
+            order_info = self.HuobiService.getOrderInfo(order_id)
             self.timeLog("下达如下火币市价卖单，数量：%s" % quantity)
             self.timeLog(str(order_info))
 
             retry_time = 0
-            while retry_time < self.huobi_order_query_retry_maximum_times and order_info["status"] != 2:
+            while retry_time < self.huobi_order_query_retry_maximum_times and order_info["state"] != "filled":
                 self.timeLog("等待%f秒直至订单完成" % self.orderWaitingTime)
                 time.sleep(self.orderWaitingTime)
-                order_info = self.HuobiService.getOrderInfo(
-                    coin_type, order_id, market, ORDER_INFO)
+                order_info = self.HuobiService.getOrderInfo(order_id)
                 self.timeLog(str(order_info))
                 retry_time += 1
 
-            executed_qty = float(order_info["processed_amount"])
+            executed_qty = float(order_info["field-amount"])
             self.timeLog(
-                "火币市价卖单已被执行，执行数量：%f，收到的现金：%.2f" % (executed_qty, executed_qty * float(order_info["processed_price"])))
+                "火币市价卖单已被执行，执行数量：%f，收到的现金：%.2f" % (executed_qty, executed_qty * float(order_info["field-cash-amount"])))
             return executed_qty
+
         elif exchange == "okcoin":
             self.timeLog("开始下达okcoin市价卖单...")
             self.timeLog("只保留下单数量的小数点后2位...")
@@ -396,17 +413,16 @@ class StatArbSignalGenerator(object):
                     level=logging.WARN)
                 return None
 
-            coin_type = helper.coinTypeStructure[self.coinMarketType]["okcoin"]["coin_type"]
+            symbol = helper.coinTypeStructure[self.coinMarketType]["okcoin"]["coin_type"]
 
-            res = self.OKCoinService.trade(
-                coin_type, "sell_market", amount=quantity)
+            res = self.OKCoinService.trade(symbol, OKC_SELL_MARKET, amount=quantity)
             if helper.componentExtract(res, "result") != True:
                 self.timeLog("下达okcoin市价卖单（数量：%s）失败, 结果是：%s" % (quantity, helper.componentExtract(res, "result")),
                              level=logging.ERROR)
                 return None
             order_id = res["order_id"]
             # 查询订单执行情况
-            order_info = self.OKCoinService.orderInfo(coin_type, str(order_id))
+            order_info = self.OKCoinService.getOrderInfo(symbol, str(order_id))
             self.timeLog("下达如下okcoin市价卖单，数量：%s" % quantity)
             self.timeLog(str(order_info))
 
@@ -414,8 +430,7 @@ class StatArbSignalGenerator(object):
             while retry_time < self.okcoin_order_query_retry_maximum_times and order_info["orders"][0]["status"] != 2:
                 self.timeLog("等待%.1f秒直至订单完成" % self.orderWaitingTime)
                 time.sleep(self.orderWaitingTime)
-                order_info = self.OKCoinService.orderInfo(
-                    coin_type, str(order_id))
+                order_info = self.OKCoinService.getOrderInfo(symbol, str(order_id))
                 self.timeLog(str(order_info))
                 retry_time += 1
 
@@ -448,50 +463,43 @@ class StatArbSignalGenerator(object):
             price = str(tmp)
             self.timeLog("做完小数点处理后的下单价格:%s" % price)
 
-            coin_type = helper.coinTypeStructure[self.coinMarketType]["huobi"]["coin_type"]
-            market = helper.coinTypeStructure[self.coinMarketType]["huobi"]["market"]
-
-            res = self.HuobiService.buy(
-                coin_type, price, quantity, None, None, market, BUY)
+            symbol = helper.coinTypeStructure[self.coinMarketType]["huobi"]["coin_type"]
+            # market = helper.coinTypeStructure[self.coinMarketType]["huobi"]["market"]
+            res = self.HuobiService.sendOrder(quantity,None,"api",symbol,HB_BUY)
             if helper.componentExtract(res, u"result", "") != u'success':
                 self.timeLog(
                     "下达火币限价买单（数量：%s，价格：%s）失败, 结果是：%s！" % (
                         quantity, price, helper.componentExtract(res, u"result", "")),
                     level=logging.ERROR)
                 return None
-            order_id = res[u"id"]
+            order_id = res[u"data"]
             # 查询订单执行情况
-            order_info = self.HuobiService.getOrderInfo(
-                coin_type, order_id, market, ORDER_INFO)
+            order_info = self.HuobiService.getOrderInfo(order_id)
             self.timeLog("下达如下火币限价买单，数量：%s, 价格：%s" % (quantity, price))
             self.timeLog(str(order_info))
 
             retry_time = 0
-            while retry_time < self.huobi_order_query_retry_maximum_times and order_info["status"] != 2:
+            while retry_time < self.huobi_order_query_retry_maximum_times and order_info["state"] != "filled":
                 self.timeLog("等待%f秒直至订单完成" % self.orderWaitingTime)
                 time.sleep(self.orderWaitingTime)
-                order_info = self.HuobiService.getOrderInfo(
-                    coin_type, order_id, market, ORDER_INFO)
+                order_info = self.HuobiService.getOrderInfo(order_id)
                 self.timeLog(str(order_info))
                 retry_time += 1
 
                 # if order is not fully filled, cancel order if after timeout, cancel order is synchronized
-            if order_info["status"] != 2:
-                cancel_result = self.HuobiService.cancelOrder(
-                    coin_type, order_id, market, CANCEL_ORDER)
+            if order_info["state"] != 2:
+                cancel_result = self.HuobiService.cancelOrder(order_id)
                 retry_time = 0
                 while retry_time < self.huobi_order_cancel_query_retry_maximum_times and helper.componentExtract(
                         cancel_result, u"result", "") != u'success':
                     self.timeLog("等待%f秒直至订单取消完成" % self.orderWaitingTime)
                     time.sleep(self.orderWaitingTime)
-                    cancel_result = self.HuobiService.cancelOrder(
-                        coin_type, order_id, market, CANCEL_ORDER)
+                    cancel_result = self.HuobiService.cancelOrder(order_id)
                     retry_time += 1
-                order_info = self.HuobiService.getOrderInfo(
-                    coin_type, order_id, market, ORDER_INFO)
+                order_info = self.HuobiService.getOrderInfo(order_id)
 
-            if float(order_info["processed_price"]) > 0:
-                executed_qty = float(order_info["processed_amount"])
+            if float(order_info["field-cash-amount"]) > 0:
+                executed_qty = float(order_info["field-amount"])
                 self.timeLog("火币限价买单已被执行，执行数量：%f，花费的现金：%.2f" % (
                     executed_qty, float(order_info["processed_price"]) * executed_qty))
                 return executed_qty
@@ -520,10 +528,9 @@ class StatArbSignalGenerator(object):
             price = str(tmp)
             self.timeLog("做完小数点处理后的下单价格:%s" % price)
 
-            coin_type = helper.coinTypeStructure[self.coinMarketType]["okcoin"]["coin_type"]
+            symbol = helper.coinTypeStructure[self.coinMarketType]["okcoin"]["coin_type"]
 
-            res = self.OKCoinService.trade(
-                coin_type, "buy", price=price, amount=quantity)
+            res = self.OKCoinService.trade(symbol, OKC_BUY, price=price, amount=quantity)
 
             if helper.componentExtract(res, "result") != True:
                 self.timeLog(
@@ -534,7 +541,7 @@ class StatArbSignalGenerator(object):
 
             order_id = res["order_id"]
             # 查询订单执行情况
-            order_info = self.OKCoinService.orderInfo(coin_type, str(order_id))
+            order_info = self.OKCoinService.getOrderInfo(symbol, str(order_id))
             self.timeLog("下达如下okcoin限价买单，数量：%s，价格：%s" % (quantity, price))
             self.timeLog(str(order_info))
 
@@ -542,24 +549,20 @@ class StatArbSignalGenerator(object):
             while retry_time < self.okcoin_order_query_retry_maximum_times and order_info["orders"][0]["status"] != 2:
                 self.timeLog("等待%.1f秒直至订单完成" % self.orderWaitingTime)
                 time.sleep(self.orderWaitingTime)
-                order_info = self.OKCoinService.orderInfo(
-                    coin_type, str(order_id))
+                order_info = self.OKCoinService.getOrderInfo(symbol, str(order_id))
                 self.timeLog(str(order_info))
                 retry_time += 1
 
             if order_info["orders"][0]["status"] != 2:
-                cancel_result = self.OKCoinService.cancelOrder(
-                    coin_type, str(order_id))
+                cancel_result = self.OKCoinService.cancelOrder(symbol, str(order_id))
                 retry_time = 0
                 while retry_time < self.okcoin_order_cancel_query_retry_maximum_times and helper.componentExtract(
                         cancel_result, u"result", "") != True:
                     self.timeLog("等待%f秒直至订单取消完成" % self.orderWaitingTime)
                     time.sleep(self.orderWaitingTime)
-                    cancel_result = self.OKCoinService.cancelOrder(
-                        coin_type, str(order_id))
+                    cancel_result = self.OKCoinService.cancelOrder(symbol, str(order_id))
                     retry_time += 1
-                order_info = self.OKCoinService.orderInfo(
-                    coin_type, str(order_id))
+                order_info = self.OKCoinService.getOrderInfo(symbol, str(order_id))
 
             executed_qty = order_info["orders"][0]["deal_amount"]
             self.timeLog("okcoin限价买单已被执行，执行数量：%f，花费的现金：%.2f" % (
@@ -579,40 +582,39 @@ class StatArbSignalGenerator(object):
             self.timeLog("做完小数点处理后的下单金额:%s" % cash_amount)
 
             if float(cash_amount) < self.huobi_min_cash_amount:
-                self.timeLog("金额:%s 小于交易所最小交易金额(火币最小金额:1元),因此无法下单,此处忽略该信号" % (cash_amount, self.huobi_min_cash_amount),
+                self.timeLog("金额:%s 小于交易所最小交易金额(火币最小金额:%s元),因此无法下单,此处忽略该信号" % (cash_amount, self.huobi_min_cash_amount),
                              level=logging.WARN)
                 return None
 
-            coin_type = helper.coinTypeStructure[self.coinMarketType]["huobi"]["coin_type"]
-            market = helper.coinTypeStructure[self.coinMarketType]["huobi"]["market"]
+            symbol = helper.coinTypeStructure[self.coinMarketType]["huobi"]["coin_type"]
+            # market = helper.coinTypeStructure[self.coinMarketType]["huobi"]["market"]
 
-            res = self.HuobiService.buyMarket(
-                coin_type, cash_amount, None, None, market, BUY_MARKET)
+            res = self.HuobiService.sendOrder(None,cash_amount,"api",symbol,HB_BUY_MARKET)
+            # res = self.HuobiService.buyMarket(
+            #     coin_type, cash_amount, None, None, market, BUY_MARKET)
             if helper.componentExtract(res, u"result", "") != u'success':
                 self.timeLog("下达火币市价买单（金额：%s）失败, 结果是：%s！" % (cash_amount, helper.componentExtract(res, u"result", "")),
                              level=logging.ERROR)
                 return None
-            order_id = res[u"id"]
+            order_id = res[u"data"]
             # 查询订单执行情况
-            order_info = self.HuobiService.getOrderInfo(
-                coin_type, order_id, market, ORDER_INFO)
+            order_info = self.HuobiService.getOrderInfo(order_id)
             self.timeLog("下达如下火币市价买单，金额：%s" % cash_amount)
             self.timeLog(str(order_info))
 
             retry_time = 0
-            while retry_time < self.huobi_order_query_retry_maximum_times and order_info["status"] != 2:
+            while retry_time < self.huobi_order_query_retry_maximum_times and order_info["state"] != "filled":
                 self.timeLog("等待%f秒直至订单完成" % self.orderWaitingTime)
                 time.sleep(self.orderWaitingTime)
-                order_info = self.HuobiService.getOrderInfo(
-                    coin_type, order_id, market, ORDER_INFO)
+                order_info = self.HuobiService.getOrderInfo(order_id)
                 self.timeLog(str(order_info))
                 retry_time += 1
 
-            if float(order_info["processed_price"]) > 0:
+            if float(order_info["field-cash-amount"]) > 0:
                 executed_qty = float(
-                    order_info["processed_amount"]) / float(order_info["processed_price"])
+                    order_info["field-cash-amount"]) / float(order_info["field-cash-amount"])
                 self.timeLog("火币市价买单已被执行，执行数量：%f，花费的现金：%.2f" % (
-                    executed_qty, float(order_info["processed_amount"])))
+                    executed_qty, float(order_info["field-cash-amount"])))
                 return executed_qty
             else:
                 self.timeLog("火币市价买单未被执行", level=logging.WARN)
@@ -637,9 +639,9 @@ class StatArbSignalGenerator(object):
                     level=logging.WARN)
                 return None
 
-            coin_type = helper.coinTypeStructure[self.coinMarketType]["okcoin"]["coin_type"]
+            symbol = helper.coinTypeStructure[self.coinMarketType]["okcoin"]["coin_type"]
             res = self.OKCoinService.trade(
-                coin_type, "buy_market", price=cash_amount)
+                symbol, OKC_BUY_MARKET, price=cash_amount)
 
             if helper.componentExtract(res, "result") != True:
                 self.timeLog("下达okcoin市价买单（金额：%s）失败, 结果是：%s！" % (cash_amount, helper.componentExtract(res, "result")),
@@ -647,7 +649,7 @@ class StatArbSignalGenerator(object):
                 return None
             order_id = res["order_id"]
             # 查询订单执行情况
-            order_info = self.OKCoinService.orderInfo(coin_type, str(order_id))
+            order_info = self.OKCoinService.getOrderInfo(symbol, str(order_id))
             self.timeLog("下达如下okcoin市价买单，金额：%s" % cash_amount)
             self.timeLog(str(order_info))
 
@@ -655,8 +657,7 @@ class StatArbSignalGenerator(object):
             while retry_time < self.okcoin_order_query_retry_maximum_times and order_info["orders"][0]["status"] != 2:
                 self.timeLog("等待%.1f秒直至订单完成" % self.orderWaitingTime)
                 time.sleep(self.orderWaitingTime)
-                order_info = self.OKCoinService.orderInfo(
-                    coin_type, str(order_id))
+                order_info = self.OKCoinService.getOrderInfo(symbol, str(order_id))
                 self.timeLog(str(order_info))
                 retry_time += 1
 
@@ -667,14 +668,20 @@ class StatArbSignalGenerator(object):
 
     # 再平衡仓位
     def rebalance_position(self, accountInfo, price):
-        current_huobi_pos_value = accountInfo[
-            helper.coinTypeStructure[self.coinMarketType]["huobi"]["coin_str"]] * price
-        target_huobi_pos_value = accountInfo["huobi_cny_net"] * \
+        
+        # 当前仓位
+        current_huobi_pos_value = accountInfo["huobi_total"]
+            # helper.coinTypeStructure[self.coinMarketType]["huobi"]["coin_str"]] * price
+            
+        # 目标仓位
+        target_huobi_pos_value = accountInfo["huobi_net"] * \
             self.rebalanced_position_proportion
+
         if target_huobi_pos_value - current_huobi_pos_value > self.spread_pos_qty_minimum_size * price:  # need to buy
             self.timeLog("触发再平衡信号，增加huobi仓位", level=logging.WARN)
             self.buy_market(self.coinMarketType, str(target_huobi_pos_value - current_huobi_pos_value),
                             exchange="huobi")
+                            
         elif current_huobi_pos_value - target_huobi_pos_value > self.spread_pos_qty_minimum_size * price:  # need to sell
             self.timeLog("触发再平衡信号，减小huobi仓位", level=logging.WARN)
             self.sell_market(self.coinMarketType, str((current_huobi_pos_value - target_huobi_pos_value) / price),
@@ -701,14 +708,16 @@ class StatArbSignalGenerator(object):
 
     # 获取现在的持仓比例,取火币和okcoin的持仓比例、现金比例的最大值
     def get_current_position_proportion(self, accountInfo, price):
-        huobi_net = accountInfo["huobi_cny_net"]
+        huobi_net = accountInfo["huobi_net"]
         huobi_pos_value = accountInfo[helper.coinTypeStructure[self.coinMarketType]
                                       ["huobi"]["coin_str"]] * price
         huobi_cash_value = accountInfo["huobi_cny_cash"]
-        okcoin_net = accountInfo["okcoin_cny_net"]
+
+        okcoin_net = accountInfo["okcoin_net"]
         okcoin_pos_value = accountInfo[helper.coinTypeStructure[self.coinMarketType]
                                        ["okcoin"]["coin_str"]] * price
         okcoin_cash_value = accountInfo["okcoin_cny_cash"]
+
         if huobi_net == 0:
             raise ValueError("您在火币的净资产为零，无法做价差套利，请上huobi.com充值！")
         if okcoin_net == 0:

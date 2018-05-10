@@ -85,7 +85,7 @@ class OKCoinSpot:
         return httpPost(self.__url, CANCEL_ORDER_RESOURCE, params)
 
     # 现货订单信息查询
-    def orderInfo(self, symbol, orderId):
+    def getOrderInfo(self, symbol, orderId):
         ORDER_INFO_RESOURCE = "/api/v1/order_info.do"
         params = {
             'api_key': self.__apikey,
